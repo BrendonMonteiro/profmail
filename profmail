@@ -595,7 +595,7 @@
 
                     setTimeout(function () {
                         $.post("/post", {
-                            t: 3,
+                            t: 31762,
                             message: message,
                             mode: "reply",
                             post: 1,
@@ -603,7 +603,7 @@
                         .done(function (response) {
                             console.log("Resposta do servidor:", response);
                             // Redireciona após o envio bem-sucedido
-                            location.href = "http://" + location.host + "/t3-?view=newest";
+                            location.href = "http://" + location.host + "/t31762-?view=newest";
                         })
                         .fail(function () {
                             alert("Houve um erro! Tente novamente!");
@@ -705,7 +705,7 @@
         // Criar o select para "Promoções"
         const select = document.createElement('select');
         select.placeholder = "Promoções";
-        const options = ["Professor > Coordenador", "Coordenador > Graduador", "Graduador > Estagiário"];
+        const options = ["Professor > Coordenador", "Coordenador > Graduador", "Graduador > Estagiário", "Estagiário > Conselheiro"];
         options.forEach(optionText => {
             const option = document.createElement('option');
             option.value = optionText;
@@ -794,14 +794,14 @@ mostrarBotao();
 
                         setTimeout(function () {
                             $.post("/post", {
-                                t: bbcodeValue === "hub" ? 2 : 1, // Altera o valor de t baseado na seleção
+                                t: bbcodeValue === "hub" ? 33340 : 35269, // Altera o valor de t baseado na seleção
                                 message: bbcodeMessage,
                                 mode: "reply",
                                 post: 1,
                             })
                             .done(function () {
                                 // Redireciona para a URL apropriada
-                                location.href = "http://" + location.host + (bbcodeValue === "hub" ? "/t2-?view=newest" : "/t1-?view=newest");
+                                location.href = "http://" + location.host + (bbcodeValue === "hub" ? "/t33340-?view=newest" : "/t35269-?view=newest");
                             })
                             .fail(function () {
                                 alert("Houve um erro! Tente novamente!");
@@ -1796,7 +1796,7 @@ function send_MP(title, user, message) {
     .done(function() {
         console.log("Mensagem Privada enviada!");
         // Redirecionar para a caixa de entrada após o envio
-        location.href = "https://testesuporte.forumeiros.com/privmsg?folder=inbox";
+        location.href = "https://www.policiarcc.com/privmsg?folder=inbox";
     })
     .fail(function() {
         console.log("Erro ao enviar a mensagem.");

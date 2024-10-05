@@ -1,0 +1,1864 @@
+<meta charset="UTF-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<title>PROFmail</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" />
+<link href="https://i.imgur.com/LJH0MOS.png" rel="icon" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+<style>
+          html {
+        height: 100%;
+        background: linear-gradient(50deg,  #831b67, #d42ca7, #db52b7);
+        background-size: 150% 150%;
+        background-attachment: fixed;
+        animation: gradientAnimation 10s ease infinite;
+      }
+
+  @keyframes gradientAnimation {
+    0% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 100% 50%;
+    }
+
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: "Poppins", sans-serif;
+    overflow-y: auto;
+    background: transparent;
+  }
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    position: relative;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .logo {
+    width: 70%;
+    max-width: 360px;
+    height: auto;
+    margin: 45 auto;
+    position: relative;
+    z-index: 0;
+    margin-top: -50px;
+  }
+
+  .logo-container {
+    position: relative;
+    display: inline-block;
+  }
+
+  .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    margin-top: -70px;
+    z-index: 1;
+    width: 100%;
+  }
+
+  .buttons {
+    overflow: visible; /* Garante que o botão não seja cortado */
+}
+
+.button {
+    flex: 1;
+    margin: 0 5px;
+    font-family: "Poppins", sans-serif;
+    padding: 5px 0;
+    animation: lineargradientAnimation 1s ease infinite;
+    color: #d42ca7;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.5s, filter 0.5s, background 0.5s, transform 0.3s ease;
+    border-radius: 1.15rem;
+    height: 90px;
+    width: 60px;
+    z-index: 10; /* Aumenta o z-index para garantir que o botão fique por cima */
+    position: relative;
+    font-weight: 900;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: grayscale(100%);
+}
+
+.button .icon {
+    margin-right: 8px;
+    height: 1.15rem;
+    width: auto;
+}
+
+.button:hover {
+    background-color: #f5dff8;
+    transform: scale(1.01) translateY(-5px); /* Leve subida ao passar o mouse */
+    filter: grayscale(0%);
+}
+
+.button {
+    transition: transform 0.3s ease;
+}
+
+  .form-container {
+    display: none;
+    margin-top: 20px;
+    padding: 20px;
+    width: 100%;
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.5s ease;
+  }
+
+  .form-container.active {
+    display: block;
+    padding-bottom: 0.8em;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .form-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .form-container input,
+  .form-container select,
+  .form-container textarea {
+    height: 62px;
+    background-color: #e7e7e7;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    color: #282828;
+    transition: border-color 0.3s ease;
+  }
+
+  .form-container input:focus,
+  .form-container select:focus,
+  .form-container textarea:focus {
+    border-color: #d42ca7;
+  }
+
+  .form-container input::placeholder,
+  .form-container textarea::placeholder {
+    color: #282828;
+  }
+
+  .form-container select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding-right: 30px;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px 16px;
+  }
+
+  .form-container .checkbox {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    font-size: 14px;
+    color: #545353;
+  }
+
+  .form-container .checkbox input {
+    width: auto;
+    margin-right: 10px;
+  }
+
+  .form-container button {
+    height: 68px;
+    background-color: #d42ca7;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: 1000;
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    width: 100%;
+    /* Define a largura para ocupar 100% do espaço disponível */
+  }
+
+  .form-container button:hover {
+    background-color: #aa2486;
+  }
+
+  .form-container .row {
+    display: flex;
+    gap: 10px;
+  }
+
+  .form-container .row input,
+  .form-container .row select,
+  .form-container .row textarea {
+    width: calc(50% - 5px);
+  }
+
+  body.scrollable .container {
+    height: auto;
+    transform: translateY(10vh);
+  }
+
+  input.invalid,
+  select.invalid,
+  textarea.invalid {
+    border: 2px solid #d9534f;
+    background-color: #f2dede;
+  }
+
+  input.invalid:focus,
+  select.invalid:focus,
+  textarea.invalid:focus {
+    border-color: #a94442;
+    outline: none;
+  }
+
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #941e75;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #d42ca7;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #d42ca7;
+  }
+
+  body {
+    scrollbar-width: thin;
+    scrollbar-color: #d42ca7 #941e75;
+  }
+
+  .credits {
+    text-align: center;
+    margin-top: 10px;
+    font-family: "Poppins", sans-serif;
+    padding: 3px;
+    font-size: 12px;
+    color: #ffffffc8;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 1s ease;
+    width: 100%;
+    line-height: 0.8em; /* Ajuste o valor conforme necessário */
+}
+
+  .credits p strong {
+    color: rgba(255, 255, 255, 0.95);
+  }
+
+  .credits i {
+    margin-right: 8px;
+  }
+
+  .credits.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Media Queries */
+  @media only screen and (max-width: 900px) {
+    body {
+    margin: 0 auto; /* Centraliza horizontalmente */
+    padding: 1rem; /* Adiciona um pequeno espaçamento ao redor */
+    display: flex;
+    width: 90%; /* Define a largura completa */
+    max-width: 900px; /* Limita a largura máxima */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: "Poppins", sans-serif;
+    overflow-y: auto;
+    background: transparent;
+    }
+
+    .buttons {
+      height: auto;
+      position: relative;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .button {
+      width: calc(80% - 5px);
+      /* Ajuste o tamanho dos botões para 20% da largura */
+      font-size: 60%;
+      margin: 2px;
+      padding: 2%;
+      flex: 1 1 15%;
+      /* Altera para ocupar toda a largura em telas menores */
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .button .icon {
+      margin-right: 10px;
+      height: 1.15rem;
+      width: auto;
+    }
+
+    .form-container {
+      margin-left: 0.5rem;
+    }
+  }
+
+  ::selection {
+        background-color: #641850;
+        color: #e07cc6;
+      }
+
+  body {
+            overflow: hidden; /* Para evitar o scroll enquanto o loader está ativo */
+        }
+
+        .loader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #be2896;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999; /* Mantém o loader acima de todo o conteúdo */
+        }
+
+        .load {
+            width: 100px;
+            height: 100px;
+        }
+
+        .load img {
+            position: absolute;
+            border-radius: 50%;
+            animation: spin 2s ease infinite;
+        }
+
+        .load img:nth-child(1) {
+            animation-delay: -1.5s;
+        }
+
+        .load img:nth-child(2) {
+            animation-delay: -1s;
+        }
+
+        .load img:nth-child(3) {
+            animation-delay: -0.5s;
+        }
+
+        .load img:nth-child(4) {
+            animation-delay: 0s;
+        }
+
+        @keyframes spin {
+            0%, 100% {
+                transform: translate(0);
+            }
+            25% {
+                transform: translate(160%);
+            }
+            50% {
+                transform: translate(160%, 160%);
+            }
+            75% {
+                transform: translate(0, 160%);
+            }
+        }
+
+        .fade-out {
+            animation: fadeOut 1s ease forwards;
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+        
+        @keyframes onda {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.letra {
+    display: inline-block; /* Para aplicar a animação corretamente */
+}
+
+        
+</style>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<body>
+  <div class="loader-container" id="loader">
+      <div class="load">
+          <img src="https://i.imgur.com/LJH0MOS.png" alt="Logo 1" />
+          <img src="https://i.imgur.com/ZmgQJJO.png" alt="Logo 2" />
+          <img src="https://i.imgur.com/LJH0MOS.png" alt="Logo 3" />
+          <img src="https://i.imgur.com/ZmgQJJO.png" alt="Logo 4" />
+      </div>
+  </div>
+  <div class="container">
+  <div class="logo-container">
+    <img class="logo" alt="Logo" src="https://i.imgur.com/nek4b9L.png" />
+  </div>
+
+  <div class="buttons">
+    <button class="button" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0px)'"
+    onclick="toggleForm('form1')">Cartas</button>
+    <button class="button" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0px)'"
+    onclick="toggleForm('form3')">Ata de Reunião</button>
+    <button class="button" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0px)'"
+    onclick="toggleForm('form2')">Edital de Homologação</button>
+</div>
+
+
+  <div class="form-container" id="form1">
+    <form action="#" id="enviar_rl">
+      <div class="row">
+        <input required="" placeholder="Nick do Professor" type="text" id="nick_membros_rl" />
+        <select required id="ass_rl" onchange="updateSelectOptions()">
+          <option value="" disabled selected>Remetente</option>
+          <option value="liderança">Liderança</option>
+          <option value="conselho">Conselho</option>
+      </select>
+      <select required id="select_rl" onchange="updatePlaceholders()">
+          <option value="" disabled selected>Tipo de notificação</option>
+      </select>
+      </div>
+      <div class="row">
+        <input required="" placeholder="Crime(s) cometido(s)" type="text" id="crimes_rl" style="display:none;"/>
+        <input required="" placeholder="Comprovação" type="text" id="comprovacao_rl" style="display:none;"/>
+      </div>
+      <input required="" placeholder="Comentário" type="text" id="comentario_rl" style="display:none;"/>
+      <div id="enviar_rl_btn" class="submit">
+        <button type="button" onclick="fill_mp('rl')">Enviar</button>
+      </div>
+      <div id="enviar_rl_dis" style="display: none;" class="submit">
+        <button disabled="" type="button">Enviando...</button>
+      </div>
+    </form>
+  </div>
+  <div class="form-container" id="form2">
+    <form action="#" id="enviar_forum">
+        <select required id="Bbcode_forum" onchange="updatePlaceholders2()">
+            <option value="" disabled selected>Tipo de BBCode</option>
+            <option value="edital" id="bbcode_edital">BBCode Edital</option>
+            <option value="hub" id="bbcode_hub">BBCode ChatHub</option>
+        </select>
+        <div class="row">
+            <input required placeholder="Nº de Homologação" type="text" id="Number_homol" style="display: none;" />
+            <input required placeholder="Data" type="date" id="Data_homol" style="display: none;" />
+            <input required placeholder="Tema" type="text" id="Tema_homol" style="display: none;" />
+        </div>
+        <input required placeholder="Corpo da Homologação (em BBCode)" type="text" id="Corpo_homol" style="display: none;" />
+        <input required placeholder="Cargo e Nick do Autor" type="text" id="Ass_homol" style="display: none;" />
+        <div class="submit">
+            <button type="button" id="enviarBtn">Enviar</button>
+        </div>
+        <div style="display: none;" class="submit">
+          <button disabled type="button" id="postandoBtn">
+              <span id="postandoText"></span>
+          </button>
+      </div>      
+    </form>
+</div>
+<div class="form-container" id="form3">
+    <form action="#" id="Atareuniao">
+        <div class="row">
+            <input required placeholder="Ministrante" type="text" id="Ministrante1"/>
+            <input required placeholder="Pauta" type="text" id="Pauta1"/>
+            <input required placeholder="Data da Reunião" type="text" id="Dataata1"/>
+        </div>
+        <div class="row">
+            <input required placeholder="Horário" type="text" id="Horário1"/>
+            <input required placeholder="Presentes" type="text" id="Presentes1"/>
+            <input required placeholder="Parcialmente Presentes" type="text" id="Parcialmente_Presentes1"/>
+        </div>
+        <div class="row">
+            <input required placeholder="Anexos" type="text" id="Anexosata"/>
+            <input required placeholder="Assinatura" type="text" id="AssAta"/>
+            <input required placeholder="Período de Referência" type="text" id="pedref"/>
+        </div>
+        <input required placeholder="Discussões Abordadas" type="text" id="DiscussõesAbordadas"/>
+        <div id="dynamicFieldsContainer"></div>
+
+        <div class="add-fields">
+            <button type="button" id="addFieldBtn">+</button>
+        </div>
+        <div class="submit">
+            <button type="button" id="enviarBtn2">Enviar</button>
+        </div>
+        <div style="display: none;" class="submit">
+          <button disabled type="button" id="postandoBtn2">
+              <span id="postandoText2"></span>
+          </button>
+      </div>   
+    </form>
+</div>
+
+  <div class="credits">
+    <p>
+      <i class="fas fa-code"></i> Desenvolvimento: <strong>.Brendon</strong> e <strong>mitojmcam</strong>.
+    </p>
+    <p class="line-break">
+      <i class="far fa-registered"></i> Todos os direitos reservados ao
+      <strong> Conselho da Companhia dos Professores</strong>.
+    </p>
+  </div>
+</div>
+</div>
+<textarea id="fa-generated-message" style="display: none;"></textarea>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://forumeiros.github.io/assets/src/form-generator/form-replace.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+<script>
+    (function ($) {
+        "use strict";
+        $(window).on("load", function () {
+            $("#enviarBtn2").on("click", function (event) {
+                event.preventDefault();
+
+                const ministrante = $("#Ministrante1").val().trim();
+                const pauta = $("#Pauta1").val().trim();
+                const dataata = ($("#Dataata1").val().trim()); 
+                const horario = $("#Horário1").val().trim();
+                const presentes = $("#Presentes1").val().trim();
+                const parcialmentePresentes = $("#Parcialmente_Presentes1").val().trim();
+                const anexosata = $("#Anexosata").val().trim(); 
+                const assinatura = $("#AssAta").val().trim();
+                const pedref = $("#pedref").val().trim();
+                const discussoesAbordadas = $("#DiscussõesAbordadas").val().trim();
+
+                // Verifica se todos os campos obrigatórios estão preenchidos
+                if (ministrante && pauta && dataata && horario && presentes && parcialmentePresentes && anexosata && assinatura && discussoesAbordadas && pedref) {
+                    const message = createMessage(ministrante, pauta, dataata, horario, presentes, parcialmentePresentes, anexosata, assinatura, discussoesAbordadas, pedref);
+                    
+                    // Esconde o botão de enviar e mostra o botão "Postando..."
+                    $("#enviarBtn2").hide();
+                    $("#postandoBtn2").prop("disabled", false).parent().show();
+
+                    console.log("Enviando a mensagem...");
+
+                    setTimeout(function () {
+                        $.post("/post", {
+                            t: 3,
+                            message: message,
+                            mode: "reply",
+                            post: 1,
+                        })
+                        .done(function (response) {
+                            console.log("Resposta do servidor:", response);
+                            // Redireciona após o envio bem-sucedido
+                            location.href = "http://" + location.host + "/t3-?view=newest";
+                        })
+                        .fail(function () {
+                            alert("Houve um erro! Tente novamente!");
+                        })
+                        .always(function () {
+                            // Reabilita o botão de enviar e esconde o botão "Postando..."
+                            $("#enviarBtn2").show();
+                            $("#postandoBtn2").prop("disabled", true).parent().hide();
+                        });
+                    }, 600);
+                } else {
+                    alert("Preencha todos os campos obrigatórios!");
+                }
+            });
+
+            function createMessage(ministrante, pauta, dataata, horario, presentes, parcialmentePresentes, anexosata, assinatura, discussoesAbordadas, pedref) {
+
+                let message = '[font=Poppins][table style="border-radius: 15px; border: none!important; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 0.5em" bgcolor="821F88"]' +
+                '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden"]' +
+                '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1.4em" bgcolor="ffffff"]' +
+                '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden"]' +
+                '[table style="border-radius: 15px; border: none!important; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1em" bgcolor="821F88"]' +
+                '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden"][img]https://imgur.com/skECnYA.png[/img]\n' +
+                '[color=white][size=18][b]ATA DE REUNIÃO DO CONSELHO[/b][/size][/color][/td][/tr][/table]\n\n' +
+
+                '[center]Dispõe-se, por intermédio desta estrutura, um registro oficial acerca da reunião do Conselho Deliberativo da companhia dos Professores.[/center]\n\n' +
+
+                '[justify][color=#821F88][b]DATA E HORÁRIO INICIAL:[/b][/color] ' + dataata + ' às ' + horario + '\n' +
+                '[color=#821F88][b]MINISTRANTE(S):[/b][/color] ' + ministrante + '\n' +
+                '[color=#821F88][b]MEMBROS PRESENTES:[/b][/color] ' + presentes + '\n' +
+                '[color=#821F88][b]MEMBROS PARCIALMENTE PRESENTES:[/b][/color] ' + parcialmentePresentes + '[/justify]\n\n' +
+
+                '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1.2em"]' +
+                '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="821F88"]' +
+                '[color=white][size=18][b]DADOS E INFORMAÇÕES[/b][/size][/color][/td][/tr]' +
+                '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="f0f0f0"]\n' +
+                '[justify][color=#821F88][b]PAUTA:[/b][/color] ' + pauta + '[/justify]\n\n' +
+                '[justify][color=#821F88][b]DISCUSSÕES ABORDADAS:[/b][/color]\n\n ' + discussoesAbordadas + '[/justify]\n\n';
+
+                const dynamicFields = $('#dynamicFieldsContainer .row');
+                let hasPromotion = false; // Variável para rastrear se Promoções já foram adicionadas
+
+                dynamicFields.each(function() {
+                    const select = $(this).find('select').first();
+                    const textarea = $(this).find('input[type="text"]').first();
+
+                    if (select.val()) {
+                        const selectedOption = select.val();
+                        const nicknames = textarea.val().trim();
+
+                        // Adiciona o título das promoções apenas uma vez
+                        if (!hasPromotion) {
+                            message += '[justify][color=#821F88][b]PROMOÇÕES:[/b][/color]\n\n[b]Promovidos da semana #PROF - '+ pedref +'[/b][/justify]'; // Título das promoções
+                            hasPromotion = true; // Define que Promoções foram adicionadas
+                        }
+
+                        message += '\n[justify][color=#821F88][b]' + selectedOption + '[/b][/color][/justify]\n';
+
+                        // Divide os nicknames usando " / " e os adiciona um abaixo do outro
+                        const nicknameList = nicknames.split(' / ');
+                        nicknameList.forEach(function(nickname) {
+                            message += '[justify]' + nickname.trim() + '[/justify]\n';
+                        });
+                    }
+                });
+
+                // Verifica se anexosata é válido ou está vazio
+                if (anexosata && isValidUrl(anexosata)) {
+                    message += '[center][table style="border-radius: 15px; border: none; overflow: hidden; width: 30%; font-family: Poppins, sans-serif"][tr style="border: none!important; overflow: hidden"][td style="width: 19%; border: none!important; overflow: hidden" bgcolor="821F88"][right][img]https://i.imgur.com/LHeyX1U.png[/img][/right][/td][td style="width: 30%; border: none!important; overflow: hidden" bgcolor="821F88"][b][size=15][left][url=' + anexosata + '][color=#ffffff]TRANSPARÊNCIA[/color][/url][/left][/size][/b][/td][/tr][/table][/center]';
+                }
+
+                message += '[/td][/tr][/table]\n\n[size=12][i]Este documento foi redigido por ' + assinatura + '[/i][/size]' +
+                '[/td][/tr][/table][/td][/tr][/table][/font]';
+
+                return message;
+            }
+
+            // Função para validar a URL
+            function isValidUrl(string) {
+                try {
+                    new URL(string);
+                    return true; // A URL é válida
+                } catch (_) {
+                    return false; // A URL não é válida
+                }
+            }
+
+
+        });
+    })(jQuery);
+</script>
+<script>
+    document.getElementById('addFieldBtn').addEventListener('click', function() {
+        // Criar um novo div para os campos
+        const newFieldDiv = document.createElement('div');
+        newFieldDiv.classList.add('row');
+        newFieldDiv.style.marginBottom = "15px"; // Adiciona margem inferior para espaço
+
+        // Criar o select para "Promoções"
+        const select = document.createElement('select');
+        select.placeholder = "Promoções";
+        const options = ["Professor > Coordenador", "Coordenador > Graduador", "Graduador > Estagiário"];
+        options.forEach(optionText => {
+            const option = document.createElement('option');
+            option.value = optionText;
+            option.textContent = optionText;
+            select.appendChild(option);
+        });
+
+        // Criar o input de texto
+        const inputText = document.createElement('input');
+        inputText.placeholder = "Nicknames";
+        inputText.type = "text";
+        
+        // Adicionar os novos campos ao novo div
+        newFieldDiv.appendChild(select);
+        newFieldDiv.appendChild(inputText);
+        
+        // Adicionar o novo div ao contêiner de campos dinâmicos
+        document.getElementById('dynamicFieldsContainer').appendChild(newFieldDiv);
+    });
+</script>
+<script>
+    function mostrarBotao2() {
+      const submitDiv = document.querySelector('.submit');
+      submitDiv.style.display = 'block'; // Exibe o botão
+      const postandoBtn = document.getElementById('postandoBtn2');
+      postandoBtn.disabled = false; // Habilita o botão
+  
+      const texto = "Postando...";
+      const postandoText = document.getElementById('postandoText2');
+      postandoText.innerHTML = ''; // Limpa o texto existente
+  
+      // Adiciona cada letra ao span e aplica a animação
+      texto.split('').forEach((letra, index) => {
+          const span = document.createElement('span');
+          span.className = 'letra';
+          span.style.animationDelay = `${index * 100}ms`; // Delay baseado na posição da letra
+          span.textContent = letra;
+          postandoText.appendChild(span);
+      });
+  }
+  
+  // Chame a função quando precisar mostrar o botão
+  mostrarBotao2();
+  </script>
+<script>
+  function mostrarBotao() {
+    const submitDiv = document.querySelector('.submit');
+    submitDiv.style.display = 'block'; // Exibe o botão
+    const postandoBtn = document.getElementById('postandoBtn');
+    postandoBtn.disabled = false; // Habilita o botão
+
+    const texto = "Postando...";
+    const postandoText = document.getElementById('postandoText');
+    postandoText.innerHTML = ''; // Limpa o texto existente
+
+    // Adiciona cada letra ao span e aplica a animação
+    texto.split('').forEach((letra, index) => {
+        const span = document.createElement('span');
+        span.className = 'letra';
+        span.style.animationDelay = `${index * 100}ms`; // Delay baseado na posição da letra
+        span.textContent = letra;
+        postandoText.appendChild(span);
+    });
+}
+
+// Chame a função quando precisar mostrar o botão
+mostrarBotao();
+</script>
+<script type="text/javascript">
+    // POSTAGEM NO FÓRUM
+    (function ($) {
+        "use strict";
+        $(window).on("load", function () {
+            $("#enviarBtn").on("click", function (event) {
+                event.preventDefault();
+
+                // Verifica se a opção "BBCode Edital" ou "hub" está selecionada
+                const bbcodeValue = $("#Bbcode_forum").val();
+                if (bbcodeValue === "edital" || bbcodeValue === "hub") {
+                    const bbcodeMessage = gatherFormData(bbcodeValue);
+
+                    if (bbcodeMessage) {
+                        // Esconde o botão de enviar e mostra o botão "Postando..."
+                        $("#enviarBtn").hide();
+                        $("#postandoBtn").prop("disabled", false).parent().show();
+
+                        setTimeout(function () {
+                            $.post("/post", {
+                                t: bbcodeValue === "hub" ? 2 : 1, // Altera o valor de t baseado na seleção
+                                message: bbcodeMessage,
+                                mode: "reply",
+                                post: 1,
+                            })
+                            .done(function () {
+                                // Redireciona para a URL apropriada
+                                location.href = "http://" + location.host + (bbcodeValue === "hub" ? "/t2-?view=newest" : "/t1-?view=newest");
+                            })
+                            .fail(function () {
+                                alert("Houve um erro! Tente novamente!");
+                            })
+                            .always(function () {
+                                // Reabilita o botão de enviar e esconde o botão "Postando..."
+                                $("#enviarBtn").show();
+                                $("#postandoBtn").prop("disabled", true).parent().hide();
+                            });
+                        }, 600);
+                    } else {
+                        alert("Preencha todos os campos obrigatórios!");
+                    }
+                } else {
+                    alert("Por favor, selecione 'BBCode Edital' ou 'hub' para continuar!");
+                }
+            });
+
+            function gatherFormData(bbcodeValue) {
+                const numberHomol = $("#Number_homol").val().trim();
+                const rawDataHomol = $("#Data_homol").val().trim();
+                const temaHomol = $("#Tema_homol").val().trim();
+                const corpoHomol = $("#Corpo_homol").val().trim(); // Texto em BBCode
+                const assHomol = $("#Ass_homol").val().trim();
+
+                if (bbcodeValue === "hub") {
+                    // Apenas numberHomol é obrigatório
+                    if (corpoHomol) {
+                        return `[font=Poppins][table style="border-radius:15px; border: none!important; line-height: 1em;" bgcolor="#821F88"][tr style="border: none!important"][td style="border: none!important"]` +
+                        `[table style="border-radius:15px; border: none!important; line-height: 1em;" bgcolor="#ffffff"][tr style="border: none!important"][td style="border: none!important"]` +
+                        `[table style="border-radius:15px; border: none!important; line-height: 1em;" bgcolor="#821F88"][tr style="border: none!important"][td style="border: none!important"][img]https://i.imgur.com/pB1K77V.png[/img]\n` +
+                        `[size=18][color=white][b]HOMOLOGAÇÃO Nº ${corpoHomol} FOI POSTADA![/b][/color][/size][/td][/tr][/table]\n\n` +
+                        `[center][color=#821F88]➤[/color] Confira [url=https://www.policiarcc.com/t33340-prof-edital-de-homologacao]clicando aqui[/url].[/center][/td][/tr][/table][/td][/tr][/table][/font]`;
+                    }
+                } else {
+                    // Para "edital", todos os campos são obrigatórios
+                    const dataHomol = formatDate(rawDataHomol); // Formata a data
+
+                    if (numberHomol && dataHomol && temaHomol && corpoHomol && assHomol) {
+                        // Criação do BBCode
+                        return `[font=Poppins][table style="border-radius:15px; border: none!important; line-height: 1em;" bgcolor="#821F88"][tr style="border: none!important"][td style="border: none!important"]` +
+                        `[table style="border-radius:15px; border: none!important; line-height: 1em;" bgcolor="#ffffff"][tr style="border: none!important"][td style="border: none!important"]` +
+                        `[table style="border-radius:15px; border: none!important; line-height: 1em;" bgcolor="#821F88"][tr style="border: none!important"][td style="border: none!important"][img]https://i.imgur.com/pB1K77V.png[/img]\n` +
+                        `[size=18][color=white][b]HOMOLOGAÇÃO Nº ${numberHomol}[/b][/color][/size][/td][/tr][/table]\n\n` +
+                        `[center][color=#821F88][b] ${temaHomol}\n` +
+                        `[/b][/color]${dataHomol}[/center]\n\n` +
+                        `[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1.2em"]` +
+                        `[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="f0f0f0"]` +
+                        `[justify]${corpoHomol}[/justify][/td][/tr][/table][/td][/tr][/table][/td][/tr][/table]\n\n` +
+                        `[center]Assina esta homologação,\n ${assHomol}[/center][/font]`;
+                    }
+                }
+                return null; // Retorna null se algum campo estiver vazio
+            }
+
+            function formatDate(rawDate) {
+                const options = { day: '2-digit', month: 'long', year: 'numeric', locale: 'pt-BR' };
+                const date = new Date(rawDate);
+                return date.toLocaleDateString('pt-BR', options);
+            }
+        });
+    })(jQuery);
+</script>
+<script>
+    function updatePlaceholders2() {
+        const BBcodeValue = document.getElementById('Bbcode_forum').value;
+        const NumberInput = document.getElementById('Number_homol');
+        const Data2Input = document.getElementById('Data_homol');
+        const TemaHomoInput = document.getElementById('Tema_homol');
+        const CorpohomoInput = document.getElementById('Corpo_homol');
+        const AsshomoInput = document.getElementById('Ass_homol');
+
+        // Reset all inputs to hidden
+        NumberInput.style.display = 'none';
+        Data2Input.style.display = 'none';
+        TemaHomoInput.style.display = 'none';
+        CorpohomoInput.style.display = 'none';
+        AsshomoInput.style.display = 'none';
+
+        // Definir placeholders e exibir campos com base no valor do BBcodeValue
+        switch (BBcodeValue) {
+            case "edital":
+            NumberInput.placeholder = "Nº de Homologação";
+                Data2Input.placeholder = "Data";
+                TemaHomoInput.placeholder = "Tema";
+                CorpohomoInput.placeholder = "Corpo da Homologação (em BBCode)";
+                AsshomoInput.placeholder = "Cargo e Nick do Autor";
+
+                NumberInput.style.display = 'block';
+                Data2Input.style.display = 'block';
+                TemaHomoInput.style.display = 'block';
+                CorpohomoInput.style.display = 'block';
+                AsshomoInput.style.display = 'block';
+                break;
+
+            case "hub":
+            CorpohomoInput.placeholder = "Nº de Homologação";
+            CorpohomoInput.style.display = 'block';
+                break;
+
+            default:
+                // Todos os campos permanecem invisíveis
+                break;
+        }
+    }
+
+</script>
+<script>
+  function updatePlaceholders() {
+    const selectValue = document.getElementById('select_rl').value;
+    const nickInput = document.getElementById('nick_membros_rl');
+    const crimesInput = document.getElementById('crimes_rl');
+    const comprovacaoInput = document.getElementById('comprovacao_rl');
+    const comentarioInput = document.getElementById('comentario_rl');
+
+    // O campo de Nick é sempre visível
+    nickInput.style.display = 'block';
+
+    // Reset all other inputs to hidden by default
+    crimesInput.style.display = 'none';
+    comprovacaoInput.style.display = 'none';
+    comentarioInput.style.display = 'none';
+
+    if (selectValue === "Carta_de_Aviso") {
+        crimesInput.placeholder = "Localização da Postagem";
+        comprovacaoInput.placeholder = "Motivo do Cancelamento";
+        comentarioInput.placeholder = "Anexos";
+
+        crimesInput.style.display = 'block';
+        comprovacaoInput.style.display = 'block';
+        comentarioInput.style.display = 'block';
+
+    } else if (selectValue === "Carta_de_Medalhas_Efetivas_Negativas") {
+        crimesInput.placeholder = "Quantidade de medalhas";
+        comprovacaoInput.placeholder = "Motivo";
+        comentarioInput.placeholder = "Comentários/Anexos";
+
+        crimesInput.style.display = 'block';
+        comprovacaoInput.style.display = 'block';
+        comentarioInput.style.display = 'block';
+
+    } else if (selectValue === "Carta_de_Advertência_Verbal" ||
+               selectValue === "Carta_de_Advertência_Interna" ||
+               selectValue === "Carta_de_Rebaixamento" ||
+               selectValue === "Carta_de_Expulsão") {
+        crimesInput.placeholder = "Motivo";
+        comprovacaoInput.placeholder = "Comentários";
+        comentarioInput.placeholder = "Anexos";
+
+        crimesInput.style.display = 'block';
+        comprovacaoInput.style.display = 'block';
+        comentarioInput.style.display = 'block';
+
+    } else if (selectValue === "Avaliação_de_Propostas") {
+        comentarioInput.placeholder = "DD MMM AAAA a DD MMM AAAA";
+        comentarioInput.style.display = 'block';
+
+    } else if (selectValue === "Avaliação_de_Promoções") {
+        comentarioInput.placeholder = "DD MMM AAAA";
+        comentarioInput.style.display = 'block';
+    
+    } else if (selectValue === "Reunião_do_Conselho"){
+        crimesInput.placeholder = "Dia da Reunião";
+        comprovacaoInput.placeholder = "XXhXX BR / XXhXX PT";
+
+        crimesInput.style.display = 'block';
+        comprovacaoInput.style.display = 'block';
+
+    } else if (selectValue === "Comunicado_da_Liderança") {
+        comentarioInput.placeholder = "Corpo do Comunicado";
+        comentarioInput.style.display = 'block';
+
+    } else if (selectValue === "Escalas_Atualizadas") {
+        comentarioInput.placeholder = "DD MMM AAAA a DD MMM AAAA";
+        comentarioInput.style.display = 'block';
+
+    } else if (selectValue === "Carta_de_Promoção_de_Estagiário") {
+
+    } else if (selectValue === "Carta_de_Promoção_de_Conselheiro") {
+
+    } else if (selectValue === "Carta_de_Estagio_de_Administração"){
+        crimesInput.placeholder = "Dias de Função";
+        comprovacaoInput.placeholder = "Comentários";
+
+        crimesInput.style.display = 'block';
+        comprovacaoInput.style.display = 'block';
+
+    } else if (selectValue === "Carta_de_Estagio_de_Assistência"){
+        crimesInput.placeholder = "Dias de Função";
+        comprovacaoInput.placeholder = "Comentários";
+
+        crimesInput.style.display = 'block';
+        comprovacaoInput.style.display = 'block';
+
+    } else if (selectValue === "Carta_de_Estagio_de_ATT1"){
+        crimesInput.placeholder = "Dias de Função";
+        comprovacaoInput.placeholder = "Comentários";
+
+        crimesInput.style.display = 'block';
+        comprovacaoInput.style.display = 'block';
+
+    } else if (selectValue === "Carta_de_Estagio_de_ATT2"){
+        crimesInput.placeholder = "Dias de Função";
+        comprovacaoInput.placeholder = "Comentários";
+
+        crimesInput.style.display = 'block';
+        comprovacaoInput.style.display = 'block';
+
+    } else if (selectValue === "Carta_de_Estagio_de_Contabilidade"){
+        crimesInput.placeholder = "Dias de Função";
+        comprovacaoInput.placeholder = "Comentários";
+
+        crimesInput.style.display = 'block';
+        comprovacaoInput.style.display = 'block';
+
+    } else if (selectValue === "Carta_de_Estagio_de_Documentação"){
+        crimesInput.placeholder = "Dias de Função";
+        comprovacaoInput.placeholder = "Comentários";
+
+        crimesInput.style.display = 'block';
+        comprovacaoInput.style.display = 'block';
+
+    } else if (selectValue === "Carta_de_Estagio_de_Finanças"){
+        crimesInput.placeholder = "Dias de Função";
+        comprovacaoInput.placeholder = "Comentários";
+
+        crimesInput.style.display = 'block';
+        comprovacaoInput.style.display = 'block';
+
+    } else if (selectValue === "Carta_de_Estagio_de_Segurança"){
+        crimesInput.placeholder = "Dias de Função";
+        comprovacaoInput.placeholder = "Comentários";
+
+        crimesInput.style.display = 'block';
+        comprovacaoInput.style.display = 'block';
+
+    } else {
+        // Show the default inputs for unhandled cases or reset to defaults
+        crimesInput.placeholder = "Crime(s) cometido(s)";
+        comprovacaoInput.placeholder = "Comprovação";
+        comentarioInput.placeholder = "Comentário";
+
+        crimesInput.style.display = 'block';
+        comprovacaoInput.style.display = 'block';
+        comentarioInput.style.display = 'block';
+    }
+}
+
+  </script>
+<script>
+  function updateSelectOptions() {
+      var assRlSelecionado = $("#ass_rl").val();
+      var selectRl = $("#select_rl");
+  
+      // Limpa as opções atuais
+      selectRl.empty();
+  
+      // Se nada estiver selecionado em ass_rl, não adiciona opções
+      if (!assRlSelecionado) {
+          return; // Sai da função sem adicionar opções
+      }
+  
+      // Adiciona a opção padrão
+      selectRl.append('<option value="" disabled selected>Tipo de notificação</option>');
+  
+      // Define as opções permitidas com base na seleção de ass_rl
+      var allowedOptions = {
+          'liderança': ['Carta_de_Aviso', 'Carta_de_Medalhas_Efetivas_Negativas', 'Carta_de_Advertência_Verbal', 'Carta_de_Advertência_Interna', 'Carta_de_Rebaixamento', 'Carta_de_Expulsão', 'Avaliação_de_Propostas', 'Avaliação_de_Promoções', 'Reunião_do_Conselho', 'Comunicado_da_Liderança', 'Escalas_Atualizadas', 'Carta_de_Promoção_de_Estagiário', 'Carta_de_Promoção_de_Conselheiro', 'Carta_de_Estagio_de_Administração','Carta_de_Estagio_de_Assistência', 'Carta_de_Estagio_de_ATT1', 'Carta_de_Estagio_de_ATT2', 'Carta_de_Estagio_de_Contabilidade', 'Carta_de_Estagio_de_Documentação', 'Carta_de_Estagio_de_Finanças', 'Carta_de_Estagio_de_Segurança'],
+          'conselho': ['Carta_de_Aviso', 'Carta_de_Medalhas_Efetivas_Negativas', 'Carta_de_Advertência_Verbal', 'Carta_de_Advertência_Interna', 'Carta_de_Rebaixamento', 'Carta_de_Expulsão', 'Avaliação_de_Propostas', 'Avaliação_de_Promoções', 'Reunião_do_Conselho', 'Comunicado_da_Liderança', 'Escalas_Atualizadas', 'Carta_de_Promoção_de_Estagiário', 'Carta_de_Promoção_de_Conselheiro', 'Carta_de_Estagio_de_Administração','Carta_de_Estagio_de_Assistência', 'Carta_de_Estagio_de_ATT1', 'Carta_de_Estagio_de_ATT2', 'Carta_de_Estagio_de_Contabilidade', 'Carta_de_Estagio_de_Documentação', 'Carta_de_Estagio_de_Finanças', 'Carta_de_Estagio_de_Segurança']
+          // Adicione outras combinações, se necessário
+      };
+  
+      // Verifica se a seleção de ass_rl existe no objeto e adiciona as opções correspondentes
+      if (allowedOptions[assRlSelecionado]) {
+          allowedOptions[assRlSelecionado].forEach(function(option) {
+              selectRl.append('<option value="' + option + '">' + option.charAt(0).toUpperCase() + option.slice(1).replace(/_/g, ' ') + '</option>');
+          });
+      }
+  }
+  </script>
+<script>
+  let activeForm = null;
+  let currentIndex = 0;
+  const buttons = document.querySelectorAll(".button");
+  const totalButtons = buttons.length;
+
+  function updateButtons() {
+    // Oculta todos os botões
+    buttons.forEach((button) => {
+      button.style.display = "none";
+    });
+
+    // Exibe apenas os botões desejados
+    for (let i = 0; i < 3; i++) {
+      if (currentIndex + i < totalButtons) {
+        buttons[currentIndex + i].style.display = "block";
+      }
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const credits = document.querySelector(".credits");
+    setTimeout(() => {
+      credits.classList.add("show");
+    }, 500); // Pequeno atraso para permitir a transição
+  });
+
+  function prevButton() {
+    if (currentIndex > 0) {
+      currentIndex--;
+      updateButtons();
+    }
+  }
+
+  function nextButton() {
+    if (currentIndex + 3 < totalButtons) {
+      currentIndex++;
+      updateButtons();
+    }
+  }
+
+  updateButtons();
+  
+  function toggleForm(formId) {
+        const newForm = document.getElementById(formId);
+        const body = document.body;
+
+        if (activeForm && activeForm !== newForm) {
+          activeForm.style.display = "none";
+          activeForm.classList.remove("active");
+        }
+
+        newForm.style.display = "flex";
+        setTimeout(() => {
+          newForm.classList.add("active");
+          newForm.style.display = "block";
+        }, 10); // Pequeno atraso para permitir a transição
+        activeForm = newForm;
+        body.classList.add("scrollable");
+      }
+
+  </script>
+<script>
+
+  const formTitles = {
+  Carta_de_Aviso: "Carta de Aviso! LEIA!",
+  Carta_de_Medalhas_Efetivas_Negativas: "Carta de Medalhas Efetivas Negativas! LEIA!",
+  Carta_de_Advertência_Verbal: "Carta de Advertência Verbal! LEIA!",
+  Carta_de_Advertência_Interna: "Carta de Advertência Interna! LEIA!",
+  Carta_de_Rebaixamento: "Carta de Rebaixamento! LEIA!",
+  Carta_de_Expulsão: "Carta de Expulsão! LEIA!",
+  Avaliação_de_Propostas: "Avaliação de Propostas! ★",
+  Avaliação_de_Promoções: "Avaliação de Promoções! ★",
+  Reunião_do_Conselho: "Reunião do Conselho! ★",
+  Comunicado_da_Liderança: "Comunicado! ★",
+  Escalas_Atualizadas: "Escalas do Estágio & Atividades Atualizadas! ★",
+  Carta_de_Promoção_de_Estagiário: "Carta de Promoção! ABRA! ★",
+  Carta_de_Promoção_de_Conselheiro: "Carta de Promoção! ABRA! ★",
+  Carta_de_Estagio_de_Administração: "Carta de Estagio (Administração)! ★",
+  Carta_de_Estagio_de_Assistência: "Carta de Estagio (Assistência)! ★",
+  Carta_de_Estagio_de_ATT1: "Carta de Estagio (Atualização 1)! ★",
+  Carta_de_Estagio_de_ATT2: "Carta de Estagio (Atualização 2)! ★",
+  Carta_de_Estagio_de_Contabilidade: "Carta de Estagio (Contabilidade)! ★",
+  Carta_de_Estagio_de_Finanças: "Carta de Estagio (Finanças)! ★",
+  Carta_de_Estagio_de_Documentação: "Carta de Estagio (Documentação)! ★",
+  Carta_de_Estagio_de_Segurança: "Carta de Estagio (Segurança)! ★",
+
+};
+
+// Função para capturar título e enviar a MP
+function handleFormSubmit(formId) {
+  if (formId === 'form1') {
+    // Supondo que o valor selecionado do título venha de um input com o ID '#title-select'
+    const selectedTitleKey = document.querySelector('#form1 #title-select').value;
+    const title = formTitles[selectedTitleKey];  // Captura o título correspondente no objeto
+    
+    // Captura valores de 'user' e 'message'
+    const user = document.querySelector('#form1 .user-input').value;
+    const message = document.querySelector('#form1 .message-input').value;
+
+    if (title) {
+      // Chama a função send_MP com o título correto
+      send_MP(title, user, message);
+    } else {
+      console.log('Título não encontrado');
+    }
+  }
+}
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const credits = document.querySelector(".credits");
+    setTimeout(() => {
+      credits.classList.add("show");
+    }, 500); // Pequeno atraso para permitir a transição
+  });
+
+
+  $(document).ready(function () {
+  // Verifica se é o form1 baseado no URL ou em algum identificador específico
+  if (window.location.pathname.includes('form1')) { 
+    const urlParams = new URLSearchParams(window.location.search).forEach(function (x, y) {
+      if (y == 'auto_sent' && x.split('')[0] == "sim") { fill_mp(x.split('')[1]) }
+      else if (y == 'select_options') { document.getElementById(x).style.display = 'block'; document.getElementById(y).value = x }
+      else if (y != 'auto_sent') { document.getElementById(y).value = x }
+    });
+    
+    $('#select_options').on('change', function () {
+      $(".card").hide();
+      $("#" + $(this).val()).show();
+    }).change();
+  }
+});
+
+function fill_mp(type) {
+  var isValid = true;
+  var nickInput = $("#nick_membros_" + type).val().trim();
+  var crimesInput = $("#crimes_" + type).val();
+  var comprovacaoInput = $("#comprovacao_" + type).val();
+  var comentarioInput = $("#comentario_" + type).val();
+
+  // Validação para nickInput
+  if (nickInput === "") {
+    isValid = false;
+    alert('Insira o nick do Professor!');
+  }
+
+  // Validação dos campos visíveis
+  if ($("#crimes_" + type).is(":visible") && crimesInput === "") {
+    isValid = false;
+  }
+  if ($("#comprovacao_" + type).is(":visible") && comprovacaoInput === "") {
+    isValid = false;
+  }
+  if ($("#comentario_" + type).is(":visible") && comentarioInput === "") {
+    isValid = false;
+  }
+
+  if (isValid) {
+    $("#enviar_" + type + "_btn").css('display', 'none');
+    $("#enviar_" + type + "_dis").css('display', 'block');
+
+    var lista = nickInput.replaceAll(' ', '').replaceAll('/', ' / ').split(' / ');
+    var user = lista.filter(n => n); // Remove entradas vazias
+
+    var title = get_title(type);
+    var message = create_message(type, $("#data_rl").val());
+
+    console.log($("#data_rl").val());
+
+    send_MP(title, user, message);
+  } else {
+    alert('Preencha todos os campos obrigatórios!');
+    return false;
+  }
+}
+
+function get_title() {
+  const selectValue = $("#select_rl").val();
+  const ass_rl = $("#ass_rl").val();
+  let prefix = "[PROF]";
+
+  if (ass_rl.includes("conselho")) {
+    prefix = "[PROF.CONS]";
+  } else if (ass_rl.includes("liderança")) {
+    prefix = "[PROF/LID]";
+  }
+
+  const title = formTitles[selectValue] || "Carta de Notificação! ★";
+  return `${prefix} ${title}`;
+}
+
+function create_message(data) {
+  var message = "";
+  var select_rl = $("#select_rl").val();
+  var crimes_rl = $("#crimes_rl").val();
+  var comprovacao_rl = $("#comprovacao_rl").val();
+  var comentario_rl = $("#comentario_rl").val();
+  var ass_rl = $("#ass_rl").val();
+
+  var bbcodeTag = '';
+  if (ass_rl === 'liderança') {
+    bbcodeTag = '[img]https://i.imgur.com/MkOGdUV.png[/img]';
+  } else if (ass_rl === 'conselho') {
+    bbcodeTag = '[img]https://i.imgur.com/1kZvQHs.png[/img]';
+  }
+
+  var anexo1 = '';
+
+    if (select_rl === 'Carta_de_Estagio_de_Administração') {
+        anexo1 = 'https://docs.google.com/document/d/1oDZe9e8zUpSw_aeN4f5dKC1QLPKA3NiOVE7bfZGUgmc/edit';
+        anexo2 = 'DA ADMINISTRAÇÃO';
+    } else if (select_rl === 'Carta_de_Estagio_de_Assistência') {
+        anexo1 = 'https://docs.google.com/document/d/1nM5biDJPFBIdFmlrnq-yFbR7VqgfNpamUrDigmBbRxk/edit';
+        anexo2 = 'DA ASSISTÊNCIA';
+    } else if (select_rl === 'Carta_de_Estagio_de_ATT1') {
+        anexo1 = 'https://docs.google.com/document/d/17f6w63CoZWt-poth22FROCMUBQ8S_eefCD69icM4HsU/edit';
+        anexo2 = 'DA ATUALIZAÇÃO 1';
+    } else if (select_rl === 'Carta_de_Estagio_de_ATT2') {
+        anexo1 = 'https://docs.google.com/document/d/13aci0poWpie2BQSbZdCcj31uqVU_CDMJ_xNASVAHeyg/edit';
+        anexo2 = 'DA ATUALIZAÇÃO 2';
+    } else if (select_rl === 'Carta_de_Estagio_de_Contabilidade') {
+        anexo1 = 'https://docs.google.com/document/d/1BJBMlR9caU_MUblrBDjCbRzEgiI0tT5DVLMP5xayeWA/edit';
+        anexo2 = 'DA CONTABILIDADE';
+    } else if (select_rl === 'Carta_de_Estagio_de_Finanças') {
+        anexo1 = 'https://docs.google.com/document/d/1YcvMG2vxVz21N5rHgghH0yqHx0pGkMSmdjeA6-yl36I/edit';
+        anexo2 = 'DAS FINANÇAS';
+    } else if (select_rl === 'Carta_de_Estagio_de_Documentação') {
+        anexo1 = 'https://docs.google.com/document/d/1ZyPfV3KT7ydvGDstoQeNOhS2Wo5q_keeX8jeQJcT34w/edit';
+        anexo2 = 'DA DOCUMENTAÇÃO';
+    } else if (select_rl === 'Carta_de_Estagio_de_Segurança') {
+        anexo1 = 'https://docs.google.com/document/d/1lNGov9kmDfPLDLxuj8OrFHxE-FhsDYuJI43MIdqN_eU/edit';
+        anexo2 = 'DA SEGURANÇA';
+    }
+
+  if (ass_rl === 'liderança' || ass_rl === 'conselho') {
+    switch (select_rl) {
+case 'Carta_de_Aviso':
+message = '[font=Poppins][table style="border-radius: 15px; border: none!important; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 0.5em" bgcolor="821F88"]' +
+          '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden"]' +
+          '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif"]' +
+          '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="ffffff"]' +
+          '[img]https://i.imgur.com/hfxVWaJ.gif[/img][/td][/tr][/table]\n\n' +
+
+          '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1.2em"]'+
+          '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="ffffff"]'+
+          '[table style="border-radius: 15px; border: none!important; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1em" bgcolor="821F88"]'+
+          '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden"]'+
+          '[img]https://i.imgur.com/4eGgtHW.png[/img]\n'+
+          '[color=white][size=20][b]CARTA DE AVISO[/b][/size][/color][/td][/tr][/table]\n'+
+
+          '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1.2em"]'+
+          '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="f0f0f0"]\n'+
+          '[size=13][center]Saudações, [color=#821F88][b]{USERNAME}[/b][/color].[/center][/size]\n'+
+          '[center]<div><hr style="border-top: 2px solid #821F88; width: 25%; margin-top: 0.3px; padding: 1.3%;"></div>[/center]\n'+
+          '[center]Informa-se que [b]a sua postagem localizada em/no "' + crimes_rl + '" foi cancelada/negada[/b] pelo(s) seguinte(s) motivo(s):[/center]\n\n'+
+          '[justify][b]' + comprovacao_rl + '[/b]\n\n' +
+          '[color=#821F88][b]ANEXOS:[/b][/color] ' + comentario_rl + '[/justify]\n\n' +
+          '[/td][/tr][/table]\n'+
+
+          '[size=11][center]Caso seja necessário volte a realizar a postagem com as informações corretas. Em caso de dúvidas consulte o remetente desta Mensagem Privada ou um conselheiro+.[/center][/size][/td][/tr][/table][/td][/tr][/table][/font]\n'+
+          
+          '[font=Poppins][center]Atentamente,\n' + 
+          '' + bbcodeTag + '[/center][/font]';
+
+                break;
+
+            case 'Carta_de_Medalhas_Efetivas_Negativas':
+            message = '[font=Poppins][table style="border-radius: 15px; border: none!important; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 0.5em" bgcolor="821F88"]' +
+          '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden"]' +
+          '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif"]' +
+          '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="ffffff"]' +
+          '[img]https://i.imgur.com/hfxVWaJ.gif[/img][/td][/tr][/table]\n\n' +
+
+          '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1.2em"]'+
+          '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="ffffff"]'+
+          '[table style="border-radius: 15px; border: none!important; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1em" bgcolor="821F88"]'+
+          '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden"]'+
+          '[img]https://i.imgur.com/ZXss8IV.gif[/img]\n'+
+          '[color=white][size=20][b]CARTA DE MEDALHAS NEGATIVAS[/b][/size][/color][/td][/tr][/table]\n'+
+
+          '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1.2em"]'+
+          '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="f0f0f0"]\n'+
+          '[size=13][center]Saudações, [color=#821F88][b]{USERNAME}[/b][/color].[/center][/size]\n'+
+          '[center]<div><hr style="border-top: 2px solid #821F88; width: 25%; margin-top: 0.3px; padding: 1.3%;"></div>[/center]\n'+
+          '[center]Informa-se que você foi [b]penalizado com ' + crimes_rl + ' medalhas efetivas negativas[/b] pelo(s) seguinte(s) motivo(s):[/center]\n\n'+
+          '[justify][b]' + comprovacao_rl + '[/b]\n\n' +
+          '[color=#821F88][b]COMENTÁRIOS | ANEXOS:[/b][/color] ' + comentario_rl + '[/justify]\n\n' +
+          '[/td][/tr][/table]\n'+
+
+          '[size=11][justify]Leia as documentações que regem a companhia [url=https://sites.google.com/view/nexusprof/documenta%C3%A7%C3%B5es?authuser=3]clicando aqui[/url] e procure manter-se atento'+
+          'para evitar mais punições. Caso queira recorrer da punição recebida, procure a Liderança apresentando argumentos factuais e plausíveis.[/justify][/size][/td][/tr][/table][/td][/tr][/table][/font]\n'+
+          
+          '[font=Poppins][center]Atentamente,\n' + 
+          '' + bbcodeTag + '[/center][/font]';
+
+                break;
+
+                case 'Carta_de_Advertência_Verbal':
+                message = '[font=Poppins][table style="border-radius: 15px; border: none!important; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 0.5em" bgcolor="821F88"]' +
+          '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden"]' +
+          '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif"]' +
+          '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="ffffff"]' +
+          '[img]https://i.imgur.com/hfxVWaJ.gif[/img][/td][/tr][/table]\n\n' +
+
+          '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1.2em"]'+
+          '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="ffffff"]'+
+          '[table style="border-radius: 15px; border: none!important; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1em" bgcolor="821F88"]'+
+          '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden"]'+
+          '[img]https://i.imgur.com/QL68H2C.png[/img]\n'+
+          '[color=white][size=20][b]CARTA DE ADVERTÊNCIA VERBAL[/b][/size][/color][/td][/tr][/table]\n'+
+
+          '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1.2em"]'+
+          '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="f0f0f0"]\n'+
+          '[size=13][center]Saudações, [color=#821F88][b]{USERNAME}[/b][/color].[/center][/size]\n'+
+          '[center]<div><hr style="border-top: 2px solid #821F88; width: 25%; margin-top: 0.3px; padding: 1.3%;"></div>[/center]\n'+
+          '[center]Informa-se que você foi [b]advertido(a) verbalmente[/b] na companhia pelo(s) seguinte(s) motivo(s):[/center]\n\n'+
+          '[justify][b]' + crimes_rl + '[/b]\n\n' +
+          '[color=#821F88][b]COMENTÁRIOS:[/b][/color] ' + comprovacao_rl + '\n' +
+          '[color=#821F88][b]ANEXOS:[/b][/color] ' + comentario_rl + '[/justify]\n' +
+          '[/td][/tr][/table]\n'+
+
+          '[size=11][justify]Leia as documentações que regem a companhia [url=https://sites.google.com/view/nexusprof/documenta%C3%A7%C3%B5es?authuser=3]clicando aqui[/url] e procure manter-se atento'+
+          'para evitar mais punições. Caso queira recorrer da punição recebida, procure a Liderança apresentando argumentos factuais e plausíveis.[/justify][/size][/td][/tr][/table][/td][/tr][/table][/font]\n'+
+          
+          '[font=Poppins][center]Atentamente,\n' + 
+          '' + bbcodeTag + '[/center][/font]';
+
+                break;
+
+                case 'Carta_de_Advertência_Interna':
+                message = '[font=Poppins][table style="border-radius: 15px; border: none!important; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 0.5em" bgcolor="821F88"]' +
+          '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden"]' +
+          '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif"]' +
+          '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="ffffff"]' +
+          '[img]https://i.imgur.com/hfxVWaJ.gif[/img][/td][/tr][/table]\n\n' +
+
+          '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1.2em"]'+
+          '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="ffffff"]'+
+          '[table style="border-radius: 15px; border: none!important; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1em" bgcolor="821F88"]'+
+          '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden"]'+
+          '[img]https://i.imgur.com/lO4aNBO.gif[/img]\n'+
+          '[color=white][size=20][b]CARTA DE ADVERTÊNCIA INTERNA[/b][/size][/color][/td][/tr][/table]\n'+
+
+          '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1.2em"]'+
+          '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="f0f0f0"]\n'+
+          '[size=13][center]Saudações, [color=#821F88][b]{USERNAME}[/b][/color].[/center][/size]\n'+
+          '[center]<div><hr style="border-top: 2px solid #821F88; width: 25%; margin-top: 0.3px; padding: 1.3%;"></div>[/center]\n'+
+          '[center]Informa-se que você [b]recebeu uma advertência interna[/b] na companhia pelo(s) seguinte(s) motivo(s):[/center]\n\n'+
+          '[justify][b]' + crimes_rl + '[/b]\n\n' +
+          '[color=#821F88][b]COMENTÁRIOS:[/b][/color] ' + comprovacao_rl + '\n' +
+          '[color=#821F88][b]ANEXOS:[/b][/color] ' + comentario_rl + '[/justify]\n' +
+          '[/td][/tr][/table]\n'+
+
+          '[size=11][justify]Leia as documentações que regem a companhia [url=https://sites.google.com/view/nexusprof/documenta%C3%A7%C3%B5es?authuser=3]clicando aqui[/url] e procure manter-se atento'+
+          'para evitar mais punições. Caso queira recorrer da punição recebida, procure a Liderança apresentando argumentos factuais e plausíveis.[/justify][/size][/td][/tr][/table][/td][/tr][/table][/font]\n'+
+          
+          '[font=Poppins][center]Atentamente,\n' + 
+          '' + bbcodeTag + '[/center][/font]';
+
+                break;
+
+                case 'Carta_de_Rebaixamento':
+                message = '[font=Poppins][table style="border-radius: 15px; border: none!important; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 0.5em" bgcolor="821F88"]' +
+          '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden"]' +
+          '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif"]' +
+          '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="ffffff"]' +
+          '[img]https://i.imgur.com/hfxVWaJ.gif[/img][/td][/tr][/table]\n\n' +
+
+          '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1.2em"]'+
+          '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="ffffff"]'+
+          '[table style="border-radius: 15px; border: none!important; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1em" bgcolor="821F88"]'+
+          '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden"]'+
+          '[img]https://i.imgur.com/5bzvHWA.gif[/img]\n'+
+          '[color=white][size=20][b]CARTA DE REBAIXAMENTO[/b][/size][/color][/td][/tr][/table]\n'+
+
+          '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1.2em"]'+
+          '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="f0f0f0"]\n'+
+          '[size=13][center]Saudações, [color=#821F88][b]{USERNAME}[/b][/color].[/center][/size]\n'+
+          '[center]<div><hr style="border-top: 2px solid #821F88; width: 25%; margin-top: 0.3px; padding: 1.3%;"></div>[/center]\n'+
+          '[center]Informa-se que você foi [b]rebaixado(a) na companhia e penalizado com cinquenta (50) medalhas negativas[/b] pelo(s) seguinte(s) motivo(s):[/center]\n\n'+
+          '[justify][b]' + crimes_rl + '[/b]\n\n' +
+          '[color=#821F88][b]COMENTÁRIOS:[/b][/color] ' + comprovacao_rl + '\n' +
+          '[color=#821F88][b]ANEXOS:[/b][/color] ' + comentario_rl + '[/justify]\n' +
+          '[/td][/tr][/table]\n'+
+
+          '[size=11][justify]Leia as documentações que regem a companhia [url=https://sites.google.com/view/nexusprof/documenta%C3%A7%C3%B5es?authuser=3]clicando aqui[/url] e procure manter-se atento'+
+          'para evitar mais punições. Caso queira recorrer da punição recebida, procure a Liderança apresentando argumentos factuais e plausíveis.[/justify][/size][/td][/tr][/table][/td][/tr][/table][/font]\n'+
+          
+          '[font=Poppins][center]Atentamente,\n' + 
+          '' + bbcodeTag + '[/center][/font]';
+
+                break;
+
+                case 'Carta_de_Expulsão':
+                message = '[font=Poppins][table style="border-radius: 15px; border: none!important; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 0.5em" bgcolor="821F88"]' +
+          '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden"]' +
+          '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif"]' +
+          '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="ffffff"]' +
+          '[img]https://i.imgur.com/hfxVWaJ.gif[/img][/td][/tr][/table]\n\n' +
+
+          '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1.2em"]'+
+          '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="ffffff"]'+
+          '[table style="border-radius: 15px; border: none!important; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1em" bgcolor="821F88"]'+
+          '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden"]'+
+          '[img]https://i.imgur.com/5bzvHWA.gif[/img]\n'+
+          '[color=white][size=20][b]CARTA DE EXPULSÃO[/b][/size][/color][/td][/tr][/table]\n'+
+
+          '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1.2em"]'+
+          '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="f0f0f0"]\n'+
+          '[size=13][center]Saudações, [color=#821F88][b]{USERNAME}[/b][/color].[/center][/size]\n'+
+          '[center]<div><hr style="border-top: 2px solid #821F88; width: 25%; margin-top: 0.3px; padding: 1.3%;"></div>[/center]\n'+
+          '[center]Informa-se que você foi[b] expulso(a) de nossa companhia e penalizado com cem (100) medalhas negativas[/b] pelo(s) seguinte(s) motivo(s):[/center]\n\n'+
+          '[justify][b]' + crimes_rl + '[/b]\n\n' +
+          '[color=#821F88][b]COMENTÁRIOS:[/b][/color] ' + comprovacao_rl + '\n' +
+          '[color=#821F88][b]ANEXOS:[/b][/color] ' + comentario_rl + '[/justify]\n' +
+          '[/td][/tr][/table]\n'+
+
+          '[size=11][justify]Leia as documentações que regem a companhia [url=https://sites.google.com/view/nexusprof/documenta%C3%A7%C3%B5es?authuser=3]clicando aqui[/url] e procure manter-se atento'+
+          'para evitar mais punições. Caso queira recorrer da punição recebida, procure a Liderança apresentando argumentos factuais e plausíveis.[/justify][/size][/td][/tr][/table][/td][/tr][/table][/font]\n'+
+          
+          '[font=Poppins][center]Atentamente,\n' + 
+          '' + bbcodeTag + '[/center][/font]';
+
+                break;
+
+          case 'Avaliação_de_Propostas':
+          message = '[font=Poppins][table style="border-radius: 15px; border: none!important; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 0.5em" bgcolor="821F88"]' +
+              '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden"]' +
+              '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif"]' +
+              '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="ffffff"]' +
+              '[img]https://i.imgur.com/hfxVWaJ.gif[/img][/td][/tr][/table]\n\n' +
+
+              '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1.2em"]'+
+              '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="ffffff"]'+
+              '[table style="border-radius: 15px; border: none!important; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1em" bgcolor="821F88"]'+
+              '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden"]'+
+              '[img]https://i.imgur.com/nByyCU1.png[/img]\n'+
+              '[color=white][size=20][b]AVALIAÇÃO DE PROPOSTAS[/b][/size][/color][/td][/tr][/table]\n'+
+
+              '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1.2em"]'+
+              '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="f0f0f0"]\n'+
+              '[size=13][center]Olá, [color=#821F88][b]{USERNAME}[/b][/color].[/center][/size]\n'+
+              '[center]<div><hr style="border-top: 2px solid #821F88; width: 25%; margin-top: 0.3px; padding: 1.3%;"></div>[/center]\n'+
+              '[justify]O Conselho da Assistência dos Professores vem, por este meio, informá-lo da [b]atualização da planilha de avaliação de propostas[/b], referente ao período compreendido entre os dias [b]' + comentario_rl + '[/b].\n\n' +
+              'Todos os estagiários e conselheiros têm a obrigação de realizar a avaliação, tendo [b]prazo até às 23h59 BR / 03h59 PT de sábado[/b]. Estão isentos da avaliação todos aqueles que estejam de licença ou reserva ou tenham retornado de uma destas após as 17h00 BR / 21h00 PT de quinta.[/justify]\n\n' +
+
+              '[table style="color: rgb(0, 0, 0);border-radius:10px; overflow:hidden; border-color: rgb(0, 0, 0);" bgcolor="#821F88" border="1"]'+
+              '[tr][td][size=16][font=Poppins][b][url=https://docs.google.com/spreadsheets/d/14G-OdtY5UEeL9lTsrK3JzG4wU4relzmlTnBm_0s3OXk/edit?usp=sharing][color=#ffffff]CLIQUE AQUI PARA ACESSAR[/color][/url][/b][/font][/size][/td][/tr][/table][/td][/tr][/table][/td][/tr][/table][/td][/tr][/table][/font]\n' +
+
+              '[font=Poppins][center]Atentamente,\n' + bbcodeTag + '[/center][/font]';
+
+                break;
+
+          case 'Avaliação_de_Promoções':
+          message = '[font=Poppins][table style="border-radius: 15px; border: none!important; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 0.5em" bgcolor="821F88"]' +
+              '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden"]' +
+              '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif"]' +
+              '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="ffffff"]' +
+              '[img]https://i.imgur.com/hfxVWaJ.gif[/img][/td][/tr][/table]\n\n' +
+
+              '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1.2em"]'+
+              '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="ffffff"]'+
+              '[table style="border-radius: 15px; border: none!important; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1em" bgcolor="821F88"]'+
+              '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden"]'+
+              '[img]https://i.imgur.com/yDjLGXX.png[/img]\n'+
+              '[color=white][size=20][b]AVALIAÇÃO DE PROMOÇÕES[/b][/size][/color][/td][/tr][/table]\n'+
+
+              '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1.2em"]'+
+              '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="f0f0f0"]\n'+
+              '[size=13][center]Olá, [color=#821F88][b]{USERNAME}[/b][/color].[/center][/size]\n'+
+              '[center]<div><hr style="border-top: 2px solid #821F88; width: 25%; margin-top: 0.3px; padding: 1.3%;"></div>[/center]\n'+
+              '[justify]A Liderança dos Professores vem, por este meio, informá-lo da [b]atualização da planilha de avaliação de promoções[/b], referente às promoções a serem realizadas no dia [b]' + comentario_rl + '[/b].\n\n' +
+              'Todos os estagiários e conselheiros têm a obrigação de realizar a avaliação, tendo [b]prazo até às 23h59 BR / 03h59 PT de sábado[/b]. Estão isentos da avaliação todos aqueles que estejam de licença ou reserva.[/justify]\n\n' +
+
+              '[table style="color: rgb(0, 0, 0);border-radius:10px; overflow:hidden; border-color: rgb(0, 0, 0);" bgcolor="#821F88" border="1"]'+
+              '[tr][td][size=16][font=Poppins][b][url=https://docs.google.com/spreadsheets/d/1PkS9hYAhrl8kLn2q9kwLVdTO59_qeRs8Ve3aEjjqzBs/edit#gid=0][color=#ffffff]CLIQUE AQUI PARA ACESSAR[/color][/url][/b][/font][/size][/td][/tr][/table][/td][/tr][/table][/td][/tr][/table][/td][/tr][/table][/font]\n' +
+
+              '[font=Poppins][center]Atentamente,\n' + bbcodeTag + '[/center][/font]';
+
+                break;
+
+               case 'Reunião_do_Conselho':
+               message = '[font=Poppins][table style="border-radius: 15px; border: none!important; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 0.5em" bgcolor="821F88"]' +
+              '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden"]' +
+              '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif"]' +
+              '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="ffffff"]' +
+              '[img]https://i.imgur.com/hfxVWaJ.gif[/img][/td][/tr][/table]\n\n' +
+
+              '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1.2em"]'+
+              '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="ffffff"]'+
+              '[table style="border-radius: 15px; border: none!important; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1em" bgcolor="821F88"]'+
+              '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden"]'+
+              '[img]https://i.imgur.com/laINEz9.png[/img]\n'+
+              '[color=white][size=20][b]REUNIÃO DO CONSELHO[/b][/size][/color][/td][/tr][/table]\n'+
+
+              '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1.2em"]'+
+              '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="f0f0f0"]\n'+
+              '[size=13][center]Olá, [color=#821F88][b]{USERNAME}[/b][/color].[/center][/size]\n'+
+              '[center]<div><hr style="border-top: 2px solid #821F88; width: 25%; margin-top: 0.3px; padding: 1.3%;"></div>[/center]\n'+
+              '[justify]A Liderança dos Professores vem, por este meio, convidá-lo a participar da [b]REUNIÃO DO CONSELHO[/b], a ser realizada no dia [b]' + crimes_rl + ' às ' + comprovacao_rl + '[/b] na [b]Sala de Reuniões do Conselho[/b].\n\n' +
+              'A presença é [b]obrigatória[/b] aos estagiários e conselheiros da companhia. Caso não possa comparecer, deverá [b]justificar a sua ausência no prazo de 24 horas após o horário de início previamente agendado[/b].[/justify]\n\n' +
+
+              '[table style="color: rgb(0, 0, 0);border-radius:10px; overflow:hidden; border-color: rgb(0, 0, 0);" bgcolor="#821F88" border="1"]'+
+              '[tr][td][size=16][font=Poppins][b][url=https://forms.gle/fT6Y2V2MRkpVAotf7][color=#ffffff]CLIQUE AQUI PARA JUSTIFICAR[/color][/url][/b][/font][/size][/td][/tr][/table][/td][/tr][/table][/td][/tr][/table][/td][/tr][/table][/font]\n' +
+
+              '[font=Poppins][center]Atentamente,\n' + bbcodeTag + '[/center][/font]';
+
+                break;
+                
+                case 'Comunicado_da_Liderança':
+               message = '[font=Poppins][table style="border-radius: 15px; border: none!important; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 0.5em" bgcolor="821F88"]' +
+              '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden"]' +
+              '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif"]' +
+              '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="ffffff"]' +
+              '[img]https://i.imgur.com/hfxVWaJ.gif[/img][/td][/tr][/table]\n\n' +
+
+              '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1.2em"]'+
+              '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="ffffff"]'+
+              '[table style="border-radius: 15px; border: none!important; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1em" bgcolor="821F88"]'+
+              '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden"]'+
+              '[img]https://i.imgur.com/nHYrcM4.png[/img]\n'+
+              '[color=white][size=20][b]COMUNICADO DA LIDERANÇA[/b][/size][/color][/td][/tr][/table]\n'+
+
+              '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1.2em"]'+
+              '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="f0f0f0"]\n'+
+              '[size=13][center]Olá, [color=#821F88][b]{USERNAME}[/b][/color].[/center][/size]\n'+
+              '[center]<div><hr style="border-top: 2px solid #821F88; width: 25%; margin-top: 0.3px; padding: 1.3%;"></div>[/center]\n'+
+              '[justify][center]A [b]Liderança dos Professores[/b] vem fazer o seguinte [b]comunicado[/b]:[/center].\n\n' +
+
+              '[b]' + comentario_rl + '[/b]\n\n'+
+
+              '[/justify][/td][/tr][/table][/td][/tr][/table][/td][/tr][/table][/font]\n' +
+
+              '[font=Poppins][center]Atentamente,\n' + bbcodeTag + '[/center][/font]';
+
+                break;
+
+                case 'Escalas_Atualizadas':
+               message = '[font=Poppins][table style="border-radius: 15px; border: none!important; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 0.5em" bgcolor="821F88"]' +
+              '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden"]' +
+              '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif"]' +
+              '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="ffffff"]' +
+              '[img]https://i.imgur.com/hfxVWaJ.gif[/img][/td][/tr][/table]\n\n' +
+
+              '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1.2em"]'+
+              '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="ffffff"]'+
+              '[table style="border-radius: 15px; border: none!important; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1em" bgcolor="821F88"]'+
+              '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden"]'+
+              '[img]https://i.imgur.com/t0kA1Wk.png[/img]\n'+
+              '[color=white][size=20][b]ESCALAS ATUALIZADAS[/b][/size][/color][/td][/tr][/table]\n'+
+
+              '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1.2em"]'+
+              '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="f0f0f0"]\n\n'+
+              '[size=13][center]Olá, [color=#821F88][b]{USERNAME}[/b][/color].[/center][/size]\n'+
+              '[center]<div><hr style="border-top: 2px solid #821F88; width: 25%; margin-top: 0.3px; padding: 1.3%;"></div>[/center]\n'+
+              '[justify]A Liderança dos Professores vem, por este meio, informá-lo da [b]atualização da escala do estágio[/b] e da [b]escala de atividades designadas ao conselho[/b], referentes ao período compreendido entre os dias [b]' + comentario_rl + '[/b].[/justify]\n\n' +
+
+
+             '[table style="color: rgb(0, 0, 0);border-radius:10px; overflow:hidden; border-color: rgb(0, 0, 0);" bgcolor="#821F88" border="1"]'+
+              '[tr][td][size=16][font=Poppins][b][url=https://docs.google.com/spreadsheets/d/1Sl2QinaM87yGo2Iq79esuEF1EAhH3REfOeeyNM3kuEA/edit#gid=349064042][color=#ffffff]DIÁRIO DE FUNÇÕES[/color][/url][/b][/font][/size][/td][/tr][/table][/td][/tr][/table][/td][/tr][/table][/td][/tr][/table][/font]\n' +
+
+              '[font=Poppins][center]Atentamente,\n' + bbcodeTag + '[/center][/font]';
+
+                break;
+
+                case 'Carta_de_Promoção_de_Estagiário':
+                message = '[font=Poppins][table style="border-radius: 15px; border: none!important; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 0.5em" bgcolor="821F88"]' +
+              '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden"]' +
+              '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif"]' +
+              '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="ffffff"]' +
+              '[img]https://i.imgur.com/hfxVWaJ.gif[/img][/td][/tr][/table]\n\n' +
+
+              '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1.2em"]' +
+              '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="ffffff"]' +
+              '[table style="border-radius: 15px; border: none!important; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1em" bgcolor="821F88"]' +
+              '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden"]' +
+              '[img]https://i.imgur.com/YWmYM2C.png[/img]\n' +
+              '[color=white][size=20][b]CARTA DE PROMOÇÃO[/b][/size][/color][/td][/tr][/table]\n' +
+
+              '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1.5em"]' +
+              '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="f0f0f0"]\n' +
+              '[size=13][center]Olá, [color=#821F88][b]{USERNAME}[/b][/color].[/center][/size]\n'+
+              '[center]<div><hr style="border-top: 2px solid #821F88; width: 25%; margin-top: 0.3px; padding: 1.3%;"></div>[/center]\n'+
+              '[justify][center]A [b]Liderança dos Professores[/b] vem, através dessa Mensagem Privada, lhe parabenizar pela [b]promoção para estagiário(a)![/b][/center]\n\n' +
+              'A partir de agora você terá novas responsabilidades e atribuições, bem como será visto como um exemplo para os demais. Seja sempre íntegro, cumpra suas metas e busque ajudar aqueles que estiveram no mesmo lugar que você.\n\n' +
+              'Esta Mensagem Privada tem como objetivo orientá-lo(a) em detalhes sobre suas novas atribuições, bem como dar dicas para o aprimoramento de seu desempenho na companhia em relação às novas metas e outras atribuições.\n\n' +
+              '<div style="padding:1.5%;border:1px solid #821F88;border-radius:8px;border-left:2rem solid #821F88;font-family:Poppins;">Caso seja aspirante a oficial+/analista+, lembre-se de atualizar as suas tarefas no RCC System, adicionando [b]\'Est.PROF\'[/b] a elas. Recorde que os oficiais do Corpo Militar e do Corpo Executivo com Especialização intermediária possuem 48 horas para a atualização de suas tarefas em caso de mudança de cargo, entrada ou saída nos seus grupos de tarefas.</div>\n' +
+              '[table style="color: rgb(0, 0, 0);border-radius:10px; overflow:hidden; border-color: rgb(0, 0, 0);" bgcolor="#821F88" border="1"][tr][td][center][/center][size=18][font=Poppins][color=white][b]META SEMANAL[/b][/color][/font][/size][/td][/tr][/table]\n' +
+              'O cargo de estagiário caracteriza-se pelo treino nos diferentes conselhos da companhia. Você será [b]escalado(a) em cada semana para um novo conselho[/b], devendo cumprir as funções que lhe foram atribuídas de acordo com a escala previamente enviada. A escala do estágio pode ser encontrada no [url=https://docs.google.com/spreadsheets/d/1Sl2QinaM87yGo2Iq79esuEF1EAhH3REfOeeyNM3kuEA/edit#gid=349064042][b]Diário de Funções do Conselho Administrativo[/b][/url], com a sua atualização a ser notificada no início da semana por meio de uma Mensagem Privada.\n\n' +
+              '<div style="padding:1.5%;border:1px solid #821F88;border-radius:8px;border-left:2rem solid #821F88;font-family:Poppins;">' +
+              '[justify]Leia o [b]CAPÍTULO II[/b] do [b][url=https://www.policiarcc.com/t35032-prof-codigo-de-disciplina-e-etica]Código de Disciplina e Ética[/url][/b] para ficar a conhecer todas as normativas relacionadas à realização das funções nos conselhos.[/justify]</div>\n' +
+              '[table style="color: rgb(0, 0, 0);border-radius:10px; overflow:hidden; border-color: rgb(0, 0, 0);" bgcolor="#821F88" border="1"][tr][td][center][/center][size=18][font=Poppins][color=white][b]AVALIAÇÃO DE PROMOÇÕES E PROPOSTAS[/b][/color][/font][/size][/td][/tr][/table]\n' +
+              '[center]Enquanto estagiário(a), também terá como função realizar a avaliação de promoções e propostas.[/center]\n\n' +
+              '<div style="padding:1.5%;border:1px solid #821F88;border-radius:8px;border-left:2rem solid #821F88;font-family:Poppins;">[justify]Leia o [b]CAPÍTULO IV[/b] do [b][url=https://www.policiarcc.com/t35032-prof-codigo-de-disciplina-e-etica]Código de Disciplina e Ética[/url][/b] para ficar a conhecer todas as normativas relacionadas à avaliação de promoções e propostas.[/justify]</div>\n' +
+              '[table style="color: rgb(0, 0, 0);border-radius:10px; overflow:hidden; border-color: rgb(0, 0, 0);" bgcolor="#821F88" border="1"][tr][td][center][/center][size=18][font=Poppins][color=white][b]REUNIÃO DO CONSELHO[/b][/color][/font][/size][/td][/tr][/table]\n' +
+              '[justify]A reunião do conselho é obrigatória para estagiários e conselheiros e habitualmente realizada às [b]14h00 BR de sábado[/b]. Ausências devem ser justificadas mediante a postagem no formulário disponibilizado na MP de notificação da reunião ou no tópico do Quadro de Advertências da companhia em até 24h após o horário de início agendado da reunião.[/justify][/justify]\n' +
+
+              '[/td][/tr][/table][/td][/tr][/table][/td][/tr][/table][/font]\n' +
+
+              '[font=Poppins][center]Atentamente,\n' + bbcodeTag + '[/center][/font]';
+
+                break;
+
+                case 'Carta_de_Promoção_de_Conselheiro':
+                message = '[font=Poppins][table style="border-radius: 15px; border: none!important; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 0.5em" bgcolor="821F88"]' +
+              '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden"]' +
+              '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif"]' +
+              '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="ffffff"]' +
+              '[img]https://i.imgur.com/hfxVWaJ.gif[/img][/td][/tr][/table]\n\n' +
+
+              '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1.2em"]' +
+              '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="ffffff"]' +
+              '[table style="border-radius: 15px; border: none!important; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1em" bgcolor="821F88"]' +
+              '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden"]' +
+              '[img]https://i.imgur.com/YWmYM2C.png[/img]\n' +
+              '[color=white][size=20][b]CARTA DE PROMOÇÃO[/b][/size][/color][/td][/tr][/table]\n' +
+
+              '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1.5em"]' +
+              '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="f0f0f0"]\n' +
+              '[size=13][center]Olá, [color=#821F88][b]{USERNAME}[/b][/color].[/center][/size]\n'+
+              '[center]<div><hr style="border-top: 2px solid #821F88; width: 25%; margin-top: 0.3px; padding: 1.3%;"></div>[/center]\n'+
+              '[justify][center]A [b]Liderança dos Professores[/b] vem, através dessa Mensagem Privada, lhe parabenizar pela [b]promoção para conselheiro(a)![/b][/center]\n\n' +
+              'Esta conquista representa um [b]marco significativo[/b] em sua jornada nos Professores, e confiamos plenamente em sua capacidade de assumir as novas responsabilidades com excelência. Seu compromisso, integridade e habilidades serão fundamentais para inspirar e orientar todos os membros.\n\n' +
+              'Lembre-se sempre de ser um [b]guia compassivo e dedicado[/b], pronto para apoiar aqueles que buscam crescimento e desenvolvimento. Estamos ansiosos para testemunhar suas realizações e contribuições nesta nova etapa!\n\n' +
+              'Esta Mensagem Privada tem como objetivo orientá-lo(a) em detalhes sobre suas novas atribuições, bem como dar dicas para o aprimoramento de seu desempenho na companhia em relação às suas atribuições.\n\n'+
+              '<div style="padding:1.5%;border:1px solid #821F88;border-radius:8px;border-left:2rem solid #821F88;font-family:Poppins;">Caso seja aspirante a oficial+/analista+, lembre-se de atualizar as suas tarefas no RCC System, adicionando [b]\'Cons.PROF\'[/b] a elas. Recorde que os oficiais do Corpo Militar e do Corpo Executivo com Especialização intermediária possuem 48 horas para a atualização de suas tarefas em caso de mudança de cargo, entrada ou saída nos seus grupos de tarefas.</div>\n' +
+
+              '[table style="color: rgb(0, 0, 0);border-radius:10px; overflow:hidden; border-color: rgb(0, 0, 0);" bgcolor="#821F88" border="1"][tr][td][center][/center][size=18][font=Poppins][color=white][b]RELAÇÃO COM OS MEMBROS[/b][/color][/font][/size][/td][/tr][/table]\n' +
+              '[justify]Com a sua promoção para conselheiro(a), surge uma nova e vital função dentro do conselho. Agora, além das suas responsabilidades administrativas, você será encarregado de [b]orientar e supervisionar os membros da companhia[/b]. Sua experiência e atenção serão recursos inestimáveis para ajudar a moldar o sucesso deles.\n\n' +
+              'Em particular, será fundamental [b]oferecer suporte e orientação aos estagiários que passarem pelo seu conselho[/b], fornecendo-lhes as ferramentas e o conhecimento necessário para que possam crescer e prosperar em suas próprias jornadas profissionais. Sua dedicação a essa tarefa contribuirá significativamente para o fortalecimento do Conselho dos Professores.[/justify]\n\n' +
+
+              '[table style="color: rgb(0, 0, 0);border-radius:10px; overflow:hidden; border-color: rgb(0, 0, 0);" bgcolor="#821F88" border="1"][tr][td][center][/center][size=18][font=Poppins][color=white][b]DEVERES DE UM CONSELHEIRO[/b][/color][/font][/size][/td][/tr][/table]\n' +
+              '[justify]Como conselheiro(a), suas responsabilidades aumentam consideravelmente. Além de orientar e supervisionar os membros, agora você também tem o [b]poder de conceder permissões[/b]. No entanto, é crucial [b]garantir que essas permissões sejam concedidas de acordo com os termos e normas estabelecidas[/b].\n\n' +
+              'Todo cuidado é necessário ao lidar com os casos que chegam até você. Embora o conselho seja uma autoridade na resolução de questões na companhia, é vital [b]evitar decisões impulsivas que possam prejudicar injustamente um membro[/b]. Cada situação deve ser cuidadosamente avaliada e analisada antes de tomar qualquer medida. Sua responsabilidade como conselheiro(a) é assegurar que [b]todas as decisões sejam tomadas de maneira justa, imparcial e em conformidade com os valores dos Professores[/b].[/justify][/justify]\n\n' +
+
+              '[table style="color: rgb(0, 0, 0);border-radius:10px; overflow:hidden; border-color: rgb(0, 0, 0);" bgcolor="#821F88" border="1"][tr][td][center][/center][size=18][font=Poppins][color=white][b]ESCALA DE ATIVIDADES DO CONSELHO[/b][/color][/font][/size][/td][/tr][/table]\n' +
+              '[justify]A escala de atividades do conselho contém um [b]leque de funções[/b] que são sorteadas semanalmente pelos conselheiros. A realização destas funções é [b]indispensável[/b].[/justify]\n\n' +
+
+              'Parabéns novamente e desejamos a você todo o sucesso nesta emocionante etapa da sua carreira!\n'+
+
+              '[/td][/tr][/table][/td][/tr][/table][/td][/tr][/table][/font]\n' +
+
+              '[font=Poppins][center]Atentamente,\n' + bbcodeTag + '[/center][/font]';
+
+                break;
+
+                case 'Carta_de_Estagio_de_Administração':
+                case 'Carta_de_Estagio_de_Assistência':
+                case 'Carta_de_Estagio_de_ATT1':
+                case 'Carta_de_Estagio_de_ATT2':
+                case 'Carta_de_Estagio_de_Contabilidade':
+                case 'Carta_de_Estagio_de_Finanças':
+                case 'Carta_de_Estagio_de_Documentação':
+                case 'Carta_de_Estagio_de_Segurança':
+    message = '[font=Poppins][table style="border-radius: 15px; border: none!important; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 0.5em" bgcolor="821F88"]' +
+        '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden"]' +
+        '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif"]' +
+        '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="ffffff"]' +
+        '[img]https://i.imgur.com/hfxVWaJ.gif[/img][/td][/tr][/table]\n\n' +
+
+        '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1.2em"]' +
+        '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="ffffff"]' +
+        '[table style="border-radius: 15px; border: none!important; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1em" bgcolor="821F88"]' +
+        '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden"]' +
+        '[img]https://i.imgur.com/t0kA1Wk.png[/img]\n' +
+        '[color=white][size=20][b]CARTA DO ESTÁGIO[/b][/size][/color][/td][/tr][/table]\n' +
+
+        '[table style="border-radius: 15px; border: none; overflow: hidden; width: 100%; font-family: Poppins, sans-serif; line-height: 1.2em"]' +
+        '[tr style="border: none!important; overflow: hidden"][td style="border: none!important; overflow: hidden" bgcolor="f0f0f0"]\n' +
+        '[size=13][center]Olá, estagiário(a) [color=#821F88][b]{USERNAME}[/b][/color].[/center][/size]\n' +
+        '[center]<div><hr style="border-top: 2px solid #821F88; width: 25%; margin-top: 0.3px; padding: 1.3%;"></div>[/center]\n' +
+        '[justify]Espero que esta Mensagem Privada o(a) encontre bem. Esta semana você está designado para cumprir as suas atribuições enquanto estagiário da companhia no [b]CONSELHO ' + anexo2.toUpperCase() + '[/b], realizando funções nos seguintes dias: [b]' + crimes_rl + '[/b].[/justify]\n\n' +
+
+        '[table style="color: rgb(0, 0, 0);border-radius:10px; overflow:hidden; border-color: rgb(0, 0, 0);" bgcolor="#821F88" border="1"]' +
+        '[tr][td][size=16][font=Poppins][b][url=https://www.policiarcc.com/t35032-prof-codigo-de-disciplina-e-etica][color=#ffffff]CÓDIGO DE DISCIPLINA E ÉTICA[/color][/url][/b][/font][/size][/td][/tr][/table]\n' +
+        'É importante ressaltar algumas das normativas às quais estará vinculado durante a realização das suas funções:\n\n' +
+        '[justify][color=#821F88]➤[/color] As funções devem ser realizadas [b]dentro do prazo estipulado no Diário de Funções e no manual do respetivo conselho[/b];\n' +
+        '[color=#821F88]➤[/color] Se uma ordem [b]não for postada no prazo estipulado[/b], é necessário realizar a [b]postagem da justificativa no prazo de vinte e quatro (24) horas após o término do prazo inicial[/b]. Se não houver postagem, [b]a ordem será considerada como não realizada, e o membro será punido com uma advertência interna[/b];\n' +
+        '[color=#821F88]➤[/color] É necessário registrar o cumprimento da função [b]mesmo quando não houver necessidade de atualização, requerimento, postagem ou ação adicional[/b];\n' +
+        '[color=#821F88]➤[/color] Caso o membro acumule [b]duas (02) ou mais ordens não cumpridas e não justificadas, este ficará negativo no desempenho semanal e receberá quinze (15) medalhas efetivas negativas[/b].[/justify]\n\n' +
+
+        '[center]Consulte a totalidade do Código de Disciplina e Ética do Conselho Administrativo [url=https://www.policiarcc.com/t35032-prof-codigo-de-disciplina-e-etica]clicando aqui[/url] e evite punições desnecessárias.[/center]\n\n' +
+
+        '[table style="color: rgb(0, 0, 0);border-radius:10px; overflow:hidden; border-color: rgb(0, 0, 0);" bgcolor="#821F88" border="1"]' +
+        '[tr][td][size=16][font=Poppins][b][url=' + anexo1 + '][color=#ffffff]CLIQUE AQUI PARA ACESSAR O MANUAL DO CONSELHO' + anexo2.toUpperCase() + '[/color][/url][/b][/font][/size][/td][/tr][/table]\n' +
+        '[b]COMENTÁRIOS ADICIONAIS DO(A) CONSELHEIRO(A):[/b] ' + comentario_rl + '\n' +
+        '[/td][/tr][/table][/td][/tr][/table][/td][/tr][/table][/font]\n' +
+        '[font=Poppins][center]Atentamente,\n' + bbcodeTag + '[/center][/font]';
+    break;
+
+
+                default:
+                message = 'Tipo de notificação não definido.';
+        }
+    } else {
+        message = 'A combinação de Tipo de Notificação e Assunto não é válida.';
+    }
+
+    return message;
+}
+
+// Função para enviar a mensagem privada (mantendo a lógica original)
+function send_MP(title, user, message) {
+    jQuery.post('/privmsg', {
+        folder: 'inbox',
+        mode: 'post',
+        post: '1',
+        'username[]': user,
+        subject: title,
+        message: message
+    })
+    .done(function() {
+        console.log("Mensagem Privada enviada!");
+        // Redirecionar para a caixa de entrada após o envio
+        location.href = "https://testesuporte.forumeiros.com/privmsg?folder=inbox";
+    })
+    .fail(function() {
+        console.log("Erro ao enviar a mensagem.");
+    });
+}
+
+// Vincula a função send_MP ao evento de envio do formulário form1
+document.getElementById('form1').addEventListener('submit', function(event) {
+    event.preventDefault(); // Impede o envio padrão do formulário
+
+    // Captura os dados do formulário
+    const nickInput = document.getElementById('nick_membros_rl').value;
+    const title = get_title();
+    const message = create_message();
+
+    // Chama a função send_MP com os dados capturados
+    send_MP(title, nickInput, message);
+});
+
+  function retorna_horario() {
+    var horario = new Date();
+    horario.setMinutes(horario.getMinutes() + horario.getTimezoneOffset() - 180);
+    var data_hoje = horario.getDate();
+    if (data_hoje < 10) { data_hoje = '0' + data_hoje };
+    const meses = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
+    var mes_hoje = meses[horario.getMonth()];
+    var ano_hoje = horario.getFullYear();
+    var retornar = data_hoje + ' ' + mes_hoje + ' ' + ano_hoje;
+
+    return retornar;
+  }
+  function updateButtons() {
+    // Oculta todos os botões
+    buttons.forEach((button) => {
+      button.style.display = "none";
+    });
+
+    // Exibe apenas os botões desejados
+    for (let i = 0; i < 3; i++) {
+      if (currentIndex + i < totalButtons) {
+        buttons[currentIndex + i].style.display = "block";
+      }
+    }
+  }
+
+</script>
+<script>
+  // Função para remover o loader com fade-out
+  function removeLoader() {
+      var loader = document.getElementById('loader');
+      loader.classList.add('fade-out');
+      loader.addEventListener('animationend', function () {
+          loader.style.display = 'none';
+          document.body.style.overflow = 'auto'; // Restaura o scroll
+      });
+  }
+
+  // Espera 5 segundos e depois chama a função para remover o loader
+  window.onload = function () {
+      setTimeout(removeLoader, 900); // Altere o tempo aqui se necessário
+  };
+</script>
+<script></script>
+</body>
+</html>

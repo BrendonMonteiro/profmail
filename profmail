@@ -1767,7 +1767,7 @@ message = '[font=Poppins][table style="border-radius: 15px; border: none!importa
 
         '[table style="color: rgb(0, 0, 0);border-radius:10px; overflow:hidden; border-color: rgb(0, 0, 0);" bgcolor="#821F88" border="1"]' +
         '[tr][td][size=16][font=Poppins][b][url=' + anexo1 + '][color=#ffffff]CLIQUE AQUI PARA ACESSAR O MANUAL DO CONSELHO' + anexo2.toUpperCase() + '[/color][/url][/b][/font][/size][/td][/tr][/table]\n' +
-        '[b]COMENTÁRIOS ADICIONAIS DO(A) CONSELHEIRO(A):[/b] ' + comentario_rl + '\n' +
+        '[b]COMENTÁRIOS ADICIONAIS DO(A) CONSELHEIRO(A):[/b] ' + comprovacao_rl + '\n' +
         '[/td][/tr][/table][/td][/tr][/table][/td][/tr][/table][/font]\n' +
         '[font=Poppins][center]Atentamente,\n' + bbcodeTag + '[/center][/font]';
     break;
